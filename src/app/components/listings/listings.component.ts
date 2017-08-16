@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FirebaseService, Listing } from '../../services/firebase.service';
+import { FirebaseListObservable } from 'angularfire2/database';
+import { Component, OnInit , Output , EventEmitter } from '@angular/core';
+import { FirebaseService , Listing } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-listings',
@@ -8,21 +9,32 @@ import { FirebaseService, Listing } from '../../services/firebase.service';
 })
 export class ListingsComponent implements OnInit {
 
-  private listings:any;
-  private firebaseService:FirebaseService;
+  private listings: FirebaseListObservable<any[]>;
+  private firebaseService: FirebaseService;
 
-  constructor(firebaseService:FirebaseService) { 
-    this.firebaseService=firebaseService;
+
+  constructor(firebaseService: FirebaseService) {
+    this.firebaseService = firebaseService;
+     this.listings = this.firebaseService.getListings();
   }
+
+
 
   ngOnInit() {
-    this.firebaseService.getListings()
-    .subscribe(listings => {
-      console.log(listings[0].bedrooms);
-      this.listings=listings;
-      
-    });
-     
+
   }
 
-}  
+  public setList(list: Listing) {
+    this.firebaseService.setList(list);
+  }
+  
+
+	public get $listings(): any {
+		return this.listings;
+  }
+
+	public set $listings(value: any) {
+		this.listings = value;
+	}
+  
+}

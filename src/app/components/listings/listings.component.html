@@ -1,3 +1,12 @@
-<p>
-  listings works!
-</p>
+<div class="row">
+  <div  *ngFor="let item of $listings | async " class="col-sm-9 col-md-4">
+    <div class="thumbnail">
+      <img  src="../../../assets/placeholder.svg" class="img-thumbnail" alt="picture" width="330" height="250">
+      <div class="caption">
+        <h3>{{item.title}}</h3>
+        <p>owner :{{item.owner}}</p>
+        <p><a [routerLink]="['/listing/'+item.$key]" (click)="setList(item)"  class="btn btn-primary" role="button">Visite</a></p>
+      </div>
+    </div>
+  </div>
+</div>

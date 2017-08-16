@@ -1,3 +1,29 @@
-<p>
-  listing works!
-</p>
+<div *ngIf="list">
+  <div class="container">
+
+    <h2>{{list.title}}</h2>
+  
+
+    <div class="row">
+      <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="../../../assets/placeholder.svg" class="img-thumbnail" alt="picture" width="330" height="250">
+        </a>
+      </div>
+      <div class="col-md-8">
+        <h4 class="text-success">price : {{list.price}} $</h4><br>
+        Bedrooms : {{list.bedrooms}}<br>
+        Type     : {{list.type}} <br>
+        City     : {{list.city}}<br>
+        Owner    :{{list.owner}}
+
+      </div>
+      
+    </div>
+    <div class="input-group">
+      <button type="button" (click)="deleteList()" class="btn btn-danger">Delete</button>
+      <button type="button" class="btn btn-primary">Edite</button>
+    </div>
+
+  </div>
+</div>
